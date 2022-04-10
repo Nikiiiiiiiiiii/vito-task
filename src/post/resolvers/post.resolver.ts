@@ -18,8 +18,8 @@ export class PostResolver {
   }
 
   @Query(() => Post)
-  async findOnePostById(@Args('_id', { type: () => String }) id: string) {
-    return this.postService.findOneById(id);
+  async findOnePostById(@Args('_id', { type: () => String }) _id: string) {
+    return this.postService.findOneById(_id);
   }
 
   @ResolveField(() => [Comment])
