@@ -1,0 +1,30 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  type: String!
+  _id: String!
+  _rev: String!
+  name: String!
+  body: String!
+  email: String!
+  comments: [Comment!]!
+}
+
+type Comment {
+  type: String!
+  _id: String!
+  _rev: String!
+  title: String!
+  body: String!
+  post_id: String!
+  post: Post!
+}
+
+type Query {
+  findPosts(page: Int = 1, itemsPerPage: Int = 10): [Post!]!
+  findOnePostById(_id: String!): Post!
+  findComments(page: Int = 1, itemsPerPage: Int = 10): [Comment!]!
+  findOneCommentById(_id: String!): Comment!
+}
