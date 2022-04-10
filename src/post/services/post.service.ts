@@ -1,27 +1,20 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+
 import { Post } from '../models/post.model';
 import { DocumentService } from '../../database/services/document.service';
-import { CommentService } from 'src/comment/services/comment.service';
 import { PaginationArgs } from '../../dto/pagination-args';
+import { paginationUtil } from '../../utils/pagination.util';
 
 @Injectable()
 export class PostService {
-  constructor(
-    private readonly documentService: DocumentService<Post>,
-    @Inject(forwardRef(() => CommentService))
-    private readonly commentService: CommentService,
-  ) {}
+  constructor(private readonly documentService: DocumentService<Post>) {}
 
   async find(paginationArgs: PaginationArgs) {
-    const limit = paginationArgs.itemsPerPage;
-    const skip = limit * (paginationArgs.page - 1);
-
     return this.documentService.find({
       selector: {
         type: Post.name,
       },
-      skip,
-      limit,
+      ...paginationUtil(paginationArgs),
     });
   }
 
