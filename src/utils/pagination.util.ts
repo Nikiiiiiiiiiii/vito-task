@@ -2,12 +2,12 @@ import { PaginationArgs } from '../dto/pagination-args';
 
 export const paginationUtil = (
   paginationArgs: PaginationArgs,
-): PaginationUtilResponse => ({
+): PaginationUtilResult => ({
   skip: paginationArgs.itemsPerPage * (paginationArgs.page - 1),
   limit: paginationArgs.itemsPerPage,
 });
 
-interface PaginationUtilResponse {
+interface PaginationUtilResult {
   readonly skip: number;
   readonly limit: number;
 }
